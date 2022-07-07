@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const itemSchema = mongoose.Schema({
     where: { type: String, required: true },
@@ -11,6 +11,6 @@ const itemSchema = mongoose.Schema({
     status: { type: String, required: false },
     description: { type: String, required: false },
     photo: { type: String, required: true },
-})
+});
 
-module.exports = mongoose.model('Item', itemSchema)
+module.exports = mongoose.model('Item', itemSchema);
