@@ -43,6 +43,11 @@ app.post('/api/item', (req, res) => {
         .then(() => res.status(201).json({ message: 'Object recorded !' }))
         .catch((error) => res.status(400).json({ error }));
 });
+app.put('/api/item/:id', (req, res) => {
+    Item.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
+        .then(() => res.status(200).json({ message: 'Object updated !' }))
+        .catch((error) => res.status(400).json({ error }));
+});
 
 app.get('/api/item/:id', (req, res) => {
     Item.findOne({ _id: req.params.id })
@@ -54,6 +59,12 @@ app.get('/api/item', (req, res) => {
     Item.find()
         .then((items) => res.status(200).json(items))
         .catch((error) => res.status(401).json({ error }));
+});
+
+app.delete('/api/item/:id', (req, res) => {
+    Item.deleteOne({ _id: req.params.id })
+        .then(() => res.status(200).json({ message: 'Object deleted !' }))
+        .catch((error) => res.status(400).json({ error }));
 });
 
 module.exports = app;
