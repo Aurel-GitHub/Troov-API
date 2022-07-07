@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/Aurel-GitHub/Troov-App-Nuxt-MongoDB/issues"
   },
-  "homepage": "https://github.com/Aurel-GitHub/Troov-App-Nuxt-MongoDB#readme"
+  "homepage": "https://github.com/Aurel-GitHub/Troov-App-Nuxt-MongoDB#readme",
+  "devDependencies": {
+    "eslint": "^8.19.0",
+    "eslint-config-google": "^0.14.0"
+  }
 }
