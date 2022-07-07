@@ -33,6 +33,7 @@ app.get('/api/item', (req, res) => {
     where: 'aeroport',
     isLost: true,
     when: '2022-06-25',
+    category: 'portefeuille',
     brandName: 'toto',
     firstname: 'doe',
     lastname: 'john',
