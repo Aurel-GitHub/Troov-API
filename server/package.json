@@ -4,6 +4,7 @@
   "description": "api mongodb for Troov test",
   "main": "server.js",
   "scripts": {
+    "start": "nodemon server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
