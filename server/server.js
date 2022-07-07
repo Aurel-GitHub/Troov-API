@@ -6,6 +6,8 @@ require('dotenv').config();
 const http = require('http');
 const app = require('./app');
 
+app.set('port', process.env.DEFAULT_PORT || process.env.PORT);
+
 /**
  * sends a valid port, whether provided as a number, a false value or a string.
  *
@@ -25,7 +27,7 @@ function normalizePort(val) {
 }
 
 const port = normalizePort(process.env.PORT_DEFAULT || process.env.PORT);
-app.set('port', port);
+app.set('port', process.env.PORT_DEFAULT || process.env.PORT);
 
 /**
  * searches for the various errors and handles them appropriately.
