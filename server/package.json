@@ -1,0 +1,19 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "api mongodb for Troov test",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aurel-GitHub/Troov-App-Nuxt-MongoDB.git"
+  },
+  "author": "aurelien landouer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aurel-GitHub/Troov-App-Nuxt-MongoDB/issues"
+  },
+  "homepage": "https://github.com/Aurel-GitHub/Troov-App-Nuxt-MongoDB#readme"
+}
