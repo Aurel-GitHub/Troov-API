@@ -45,9 +45,8 @@ app.post('/api/item', (req, res) => {
 });
 
 app.get('/api/item/:id', (req, res) => {
-    let item = {};
-    Item.findById({ _id: req.params.id })
-        .then((item = res.status(200).json(item)))
+    Item.findOne({ _id: req.params.id })
+        .then((item) => res.status(200).json(item))
         .catch((error) => res.status(404).json({ error }));
 });
 
