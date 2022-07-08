@@ -19,7 +19,7 @@ exports.createItem = (req, res) => {
     });
     item.save(item)
         .then(() =>
-            res.status(201).json({ message: 'Object recorded !', item })
+            res.status(201).json({ message: 'Objet enregistré !', item })
         )
         .catch((error) => res.status(400).json({ error }));
 };
@@ -32,7 +32,7 @@ exports.createItem = (req, res) => {
 exports.updateItem = (req, res) => {
     Item.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
         .then(() => {
-            res.status(200).json({ message: 'Object updated !' });
+            res.status(200).json({ message: 'Objet modifié' });
         })
         .catch((error) => res.status(400).json({ error }));
 };
@@ -67,12 +67,14 @@ exports.getAllItems = (req, res) => {
 exports.deleteItem = (req, res) => {
     Item.findOne({ _id: req.params.id })
         .then((item) => {
+            // eslint-disable-next-line no-console
+            console.log('req.auth.userId', req.auth.userId);
             if (item.userId != req.auth.userId) {
-                res.status(401).json({ message: 'unathorized' });
+                res.status(401).json({ message: 'non autorisé' });
             } else {
                 Item.deleteOne({ _id: req.params.id })
                     .then(() =>
-                        res.status(200).json({ message: 'Object deleted !' })
+                        res.status(200).json({ message: 'Objet supprimé' })
                     )
                     .catch((error) => res.status(400).json({ error }));
             }

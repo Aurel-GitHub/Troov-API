@@ -59,3 +59,18 @@ exports.login = (req, res) => {
         })
         .catch((error) => res.status(500).json({ error }));
 };
+
+/**
+ * login user
+ * @param {Express.Request} req
+ * @param {Express.Response} res
+ */
+exports.logout = (req, res) => {
+    try {
+        req.session = null;
+        req.headers.authorization = null;
+        return res.status(200).send({ message: "You've been signed out!" });
+    } catch (error) {
+        return error;
+    }
+};
