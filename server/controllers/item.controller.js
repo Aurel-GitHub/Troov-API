@@ -37,8 +37,6 @@ exports.updateItem = (req, res) => {
             const userId = decodedToken.userId;
             const isAuthorized = item.userId == userId;
 
-            // eslint-disable-next-line no-console
-            console.log('item', item, userId, 'isAuthorized', isAuthorized);
             if (!isAuthorized) {
                 res.status(401).json({ message: 'non autorisé' });
             } else {
@@ -90,8 +88,6 @@ exports.deleteItem = (req, res) => {
             const userId = decodedToken.userId;
             const isAuthorized = item.userId == userId;
 
-            // eslint-disable-next-line no-console
-            console.log('item', item, userId, 'isAuthorized', isAuthorized);
             if (!isAuthorized) {
                 res.status(401).json({ message: 'non autorisé' });
             } else {
