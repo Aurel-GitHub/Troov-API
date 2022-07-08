@@ -30,11 +30,29 @@ exports.createItem = (req, res) => {
  * @param {Express.Response} res
  */
 exports.updateItem = (req, res) => {
-    Item.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
-        .then(() => {
-            res.status(200).json({ message: 'Objet modifié' });
+    Item.findById({ _id: req.params.id })
+        .then((item) => {
+            const token = req.headers.authorization.split(' ')[1];
+            const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
+            const userId = decodedToken.userId;
+            const isAuthorized = item.userId == userId;
+
+            // eslint-disable-next-line no-console
+            console.log('item', item, userId, 'isAuthorized', isAuthorized);
+            if (!isAuthorized) {
+                res.status(401).json({ message: 'non autorisé' });
+            } else {
+                Item.updateOne(
+                    { _id: req.params.id },
+                    { ...req.body, _id: req.params.id }
+                )
+                    .then(() => {
+                        res.status(200).json({ message: 'Objet modifié' });
+                    })
+                    .catch((error) => res.status(400).json({ error }));
+            }
         })
-        .catch((error) => res.status(400).json({ error }));
+        .catch((error) => res.status(401).json({ error }));
 };
 
 /**
@@ -65,11 +83,16 @@ exports.getAllItems = (req, res) => {
  * @param {Express.Response} res
  */
 exports.deleteItem = (req, res) => {
-    Item.findOne({ _id: req.params.id })
+    Item.findById({ _id: req.params.id })
         .then((item) => {
+            const token = req.headers.authorization.split(' ')[1];
+            const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
+            const userId = decodedToken.userId;
+            const isAuthorized = item.userId == userId;
+
             // eslint-disable-next-line no-console
-            console.log('req.auth.userId', req.auth.userId);
-            if (item.userId != req.auth.userId) {
+            console.log('item', item, userId, 'isAuthorized', isAuthorized);
+            if (!isAuthorized) {
                 res.status(401).json({ message: 'non autorisé' });
             } else {
                 Item.deleteOne({ _id: req.params.id })
@@ -81,8 +104,3 @@ exports.deleteItem = (req, res) => {
         })
         .catch((error) => res.status(401).json({ error }));
 };
-// exports.deleteItem = (req, res) => {
-//     Item.deleteOne({ _id: req.params.id })
-//         .then(() => res.status(200).json({ message: 'Object deleted !' }))
-//         .catch((error) => res.status(400).json({ error }));
-// };
