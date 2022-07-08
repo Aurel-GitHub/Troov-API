@@ -11,6 +11,7 @@ const itemSchema = mongoose.Schema({
     status: { type: String, required: false },
     description: { type: String, required: false },
     photo: { type: String, required: true },
+    userId: { type: String, required: true },
 });
 
 module.exports = mongoose.model('Item', itemSchema);
