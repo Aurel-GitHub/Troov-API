@@ -19,7 +19,16 @@ exports.signup = (req, res) => {
                 lastname: req.body.lastname,
             });
             user.save()
-                .then(() => res.status(201).json({ message: 'User created !' }))
+                .then(() =>
+                    res.status(201).json({
+                        userId: user._id,
+                        token: jwt.sign(
+                            { userId: user._id },
+                            process.env.SECRET_KEY,
+                            { expiresIn: '24h' }
+                        ),
+                    })
+                )
                 .catch((error) => res.status(400).json({ error }));
         })
         .catch((error) => res.status(500).json({ error }));
