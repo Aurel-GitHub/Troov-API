@@ -22,6 +22,7 @@ exports.signup = (req, res) => {
                 .then(() =>
                     res.status(201).json({
                         userId: user._id,
+                        firstname: user.firstname,
                         token: jwt.sign(
                             { userId: user._id },
                             process.env.SECRET_KEY,
@@ -57,6 +58,7 @@ exports.login = (req, res) => {
                     }
                     res.status(200).json({
                         userId: user._id,
+                        firstname: user.firstname,
                         token: jwt.sign(
                             { userId: user._id },
                             process.env.SECRET_KEY,
